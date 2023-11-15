@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head') %>
+
+    <body>
+        <figure>
+            <img src="/img/logo-DH.png" alt="Logo Digital House">
+        </figure>
+        <h1>
+            <%= movie.title %>
+        </h1>
+        <br>
+        <p>RATING: <%= movie.rating %>
+        </p>
+        <p>AWARDS: <%= movie.awards %>
+        </p>
+        <p>LENGTH: <%= movie.length + ' min' %>
+        </p>
+        <p>RELEASE DATE: <%= movie.release_date %>
+        </p>
+        <p>GENERO: <%= movie.genre ? movie.genre.name : 'SIN ESPECIFICAR' %>
+        </p>
+        <br>
+
+        <ul>
+            <p class="fw-bold">Actores: </p>
+            <% if (movie.actor) { %>
+                <% movie.actors.forEach(actor=> { %>
+                    <li>
+                        <%= actor.first_name %>
+                            <%= actor.last_name %>
+                    </li>
+                    <% }) %>
+            <% } else { %>
+                <p class="text-muted"> No hay actores vinculados a esta peli</p>
+            <% } %>
+
+            
+        </ul>
+        <br>
+
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="..." class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section>
+            <!--Aquí debe colocar los botones de Modificar - Borrar y Listado de Películas-->
+            <a class="botonAgregar" href="/movies/edit/<%= movie.id %>">Editar Pelicula</a>
+            <a class="botonBorrar" href="/movies/delete/<%= movie.id %>">Borrar Pelicula</a>
+        </section>
+
+    </body>
+
+</html>

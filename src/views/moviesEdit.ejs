@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include('./partials/head') %>
+
+    <body>
+        <figure>
+            <img src="/img/logo-DH.png" alt="Logo Digital House">
+        </figure>
+        <h1 class="titulo">Película Editada: <%= movie.title %>
+        </h1>
+        <section class="formulario">
+            <form action="/movies/update/<%= movie.id %>?_method=PUT" method="POST">
+                <label for="title">Title </label>
+                <p><input type="text" name="title" id="" value="<%= movie.title %>" required></p>
+                <label for="rating">Rating </label>
+                <p><input type="number" name="rating" id="" value="<%= movie.rating %>" required></p>
+                <label for="awards">Awards </label>
+                <p><input type="number" name="awards" id="" value="<%= movie.awards %>" required></p>
+                <label for="release_date">Release date </label>
+                <p><input type="date" name="release_date" id=""
+                        value="<%= moment(movie.release_date).format('YYYY-MM-DD') %>" required></p>
+                <label for="length">Length </label>
+                <p><input type="number" name="length" id="" value="<%= movie.length %>" required></p>
+                <label for="genre_id">Genre </label>
+                <p>
+                    <select name="genre_id" id="" required>
+                        <% allGenres.forEach(genre=> { %>
+                            <option value="<%= genre.id %>" <% if (movie.genre_id==genre.id) { %>
+                                <%= 'selected' %>
+                                    <% }; %>><%= genre.name %>
+                            </option>
+                            <% }); %>
+                    </select>
+                </p>
+                
+                    
+            
+
+
+
+                <div class="card mb-3" style="max-width: 1040px;">
+                    <div class="row g-0">
+                        <div class="col-md-12">
+                            <div class="card-body">
+                                <div class="mb-3 col-12">
+                                    <div class="row">
+                                    <% actors.forEach(actor=> { %>
+                                        
+                                            <div class="col-12 col-md-3">
+                                                <div class="form-check selec_actors">
+                                                    <input name="actors" class="form-check-input" type="checkbox" <%= movie.actors.map(actor => actor.id).includes(actor.id) && 'checked' %> value="<%= actor.id %>" id="actor"<%= actor.id %>>
+                                                    <label class="form-check-label" for="actor"<%= actor.id %>>
+                                                        <%= actor.first_name %>
+                                                            <%= actor.last_name %>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        
+            
+                                        <% }) %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <br>
+                <p> <button class="botonAgregar" type="submit">Actualizar</button>
+
+                    <a class="botonVolver" href="/movies">Listado de Películas</a>
+                </p>
+            </form>
+        </section>
+    </body>
+
+</html>
